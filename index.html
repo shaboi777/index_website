@@ -1,0 +1,166 @@
+<html lang="en">
+<head>
+    <title>Website Design Using HTML And CSS</title>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="main" id="mainElement"> 
+        <nav>
+            <div class="Logo">
+                <img src="RealPhone_WebPage_Images/images/Untitled.png">
+                <!-- <vdee width="150" height="50" autoplay loop muted>
+                    <source src="RealPhone_WebPage_Images/images/Untitled.mp4">
+                </video> -->
+            </div>
+            <div class="nav-links">
+                <ul>
+                    <li><a href="a">Home</a></li>
+                    <li><a href="a">Games</a></li>
+                    <li><a href="a">Accessories</a></li>
+                    <li><a href="a">Buy</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="information">
+            <div class="overlay"></div>
+            <div class="container">
+            <img class="fade-image" src="RealPhone_WebPage_Images/images/mario.png" width="300" height="100" class="Image 1">
+            <img class="fade-image" src="RealPhone_WebPage_Images/images/sonic.png" width="300" height="100" class="Image 2">
+            <img class="fade-image" src="RealPhone_WebPage_Images/images/banchode.png" width="300" height="100" class="Image 3">
+            <img class="fade-image" src="RealPhone_WebPage_Images/images/crash.png" width="300" height="100" class="Image 4">
+        </div>
+            <div id="circle">
+                <div class="feature one">
+                    <!-- <img src="RealPhone_WebPage_Images/images/mario.png" width="300" height="100"> -->
+                    <div>
+                        <h1>Nintendo</h1>
+                        <p>Over the years, it has become a major player </p> 
+                        <p>in the video game industry, creating iconic </p>
+                        <p>franchises such as Super Mario. The company</p> 
+                        <p>has a rich history of creating family-friendly</p>
+                        <p>games and continues to be a leading force in the gaming world.</p>
+                    </div>
+                </div>
+                <div class="feature two">
+                    <!-- <img src="RealPhone_WebPage_Images/images/sonic.png" width="300" height="100"> -->
+                    <div>
+                        <h1>Sega</h1>
+                        <p>Known for iconic franchises like Sonic the Hedgehog</p>
+                            <p>and a history of innovative consoles,</p> 
+                            <p>Sega transitioned from hardware manufacturing</p>
+                            <p> to game development and publishing,</p>
+                            <p> leaving a significant mark on gaming history.</p>
+                    </div>
+                </div>
+                <div class="feature three">
+                    <!-- <img src="RealPhone_WebPage_Images/images/pika.png" width="300" height="100"> -->
+                    <div>
+                        <h1>Microsoft</h1>
+                        <p>Microsoft is a major technology company known for</p> 
+                        <p>its software products and forays into the gaming </p>
+                        <p>industry. "Banjo-Kazooie," which is now part of </p>
+                        <p>Xbox Game Studios, solidifying Microsoft's </p> 
+                        <p> in the gaming world.</p>
+                    </div>
+                </div>
+                <div class="feature four">
+                    <!-- <img src="RealPhone_WebPage_Images/images/pacman.png" width="300" height="100"> -->
+                    <div>
+                        <h1>Sony</h1>
+                        <p>Sony is a prominent technology and entertainment</p> 
+                        <p>company known for its PlayStation gaming consoles. </p>
+                        <p>are recognized for the success of the "Crash </p>
+                        <p> franchise, which became a beloved series of </p>
+                        <p>platforming games on PlayStation consoles</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="controls">
+            <img src="RealPhone_WebPage_Images/images/arrow.png" id="upBtn">
+            <h3>Companies</h3>
+            <img src="RealPhone_WebPage_Images/images/arrow.png" id="downBtn" >
+        </div>
+
+    </div>
+    <script>
+// script.js
+const images = document.querySelectorAll('.fade-image');
+let currentImageIndex = 0;
+let rotateValue = 'rotate(0deg)';
+const fadeDelay = 100;
+const circle = document.getElementById('circle');
+const upBtn = document.getElementById('upBtn');
+const downBtn = document.getElementById('downBtn');
+const mainElement = document.getElementById('mainElement'); // Reference to the .main element
+
+// Function to show the current image and hide all others
+function showCurrentImage() {
+    for (let i = 0; i < images.length; i++) {
+        if (i === currentImageIndex) {
+            images[i].classList.add('visible');
+        } else {
+            images[i].classList.remove('visible');
+        }
+    }
+}
+
+// Initially show the first image
+showCurrentImage();
+
+upBtn.onclick = function () {
+    rotateSum = rotateValue + ' rotate(-90deg)';
+    circle.style.transform = rotateSum;
+    rotateValue = rotateSum;
+
+    setTimeout(() => {
+        currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+        showCurrentImage();
+    }, fadeDelay);
+
+    // Change the background gradient of the .main element
+    const randomGradient = getRandomGradient();
+    mainElement.style.background = randomGradient;
+};
+
+downBtn.onclick = function () {
+    rotateSum = rotateValue + ' rotate(90deg)';
+    circle.style.transform = rotateSum;
+    rotateValue = rotateSum;
+
+    setTimeout(() => {
+        currentImageIndex = (currentImageIndex + 1) % images.length;
+        showCurrentImage();
+    }, fadeDelay);
+
+    // Change the background gradient of the .main element
+    const randomGradient = getRandomGradient();
+    mainElement.style.background = randomGradient;
+};
+
+function getRandomGradient() {
+    const angle = Math.floor(Math.random() * 360); // Random angle between 0 and 360
+    const color1 = getRandomColor();
+    const color2 = getRandomColor();
+    return `linear-gradient(${angle}deg, ${color1}, ${color2})`;
+}
+
+function getRandomColor() {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
+
+    </script>
+</body>
+
+
+
+</html>
+
